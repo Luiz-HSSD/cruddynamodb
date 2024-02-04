@@ -361,3 +361,5 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/cruddynamodb/Properties/launchSettings.json
+/cruddynamodb/Properties/launchSettings.json
