@@ -130,7 +130,7 @@ namespace cruddynamodb.Service
             return "S";
         }
 
-        public async Task<Dictionary<string, AttributeValue>> FrutaPoIdAsync(Fruta fruta)
+        public async Task<Fruta?> FrutaPoIdAsync(Fruta fruta)
         {
             var key = new Dictionary<string, AttributeValue>
             {
@@ -144,7 +144,22 @@ namespace cruddynamodb.Service
             };
 
             var response = await client.GetItemAsync(request);
-            return response.Item.Count == 0? null : response.Item;
+
+            if (response.Item.Count == 0) 
+            {
+                return null;
+            }
+            else
+            {
+                var ft = new Fruta()
+                {
+                    id = int.Parse(response.Item["id"].N),
+                    nome = response.Item["nome"].S,
+                    preco = double.Parse(response.Item["preco"].N),
+                };
+                return ft;
+
+            }
         }
 
 

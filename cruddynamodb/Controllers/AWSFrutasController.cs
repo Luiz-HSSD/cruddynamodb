@@ -40,7 +40,16 @@ namespace cruddynamodb.Controllers
             {
                 id = id
             };
-            return await service.FrutaPoIdAsync(massa);
+            var resp = await service.FrutaPoIdAsync(massa);
+            if(resp != null) 
+            {
+                Response.StatusCode = 200;
+            
+            }else { 
+            
+                    Response.StatusCode = 404;
+            }
+            return resp;
         }
 
         [HttpPost()]
